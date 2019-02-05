@@ -5,7 +5,7 @@ let y;
 let colorChoice;
 
 function setup() {
-	createCanvas(600, 600);
+	createCanvas(windowWidth, windowHeight);
 	x = width / 2;
 	y = height / 2;
  colorChoice = 0;
