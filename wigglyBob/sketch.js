@@ -2,6 +2,9 @@
 let myNickname = "wigglyBob";
 let nFramesInLoop = 200;
 let bEnableExport = true;
+let petalOne;
+let petalTwo;
+let petalThree;
 //don't touch these globals
 let nElapsedFrames;
 let bRecording;
@@ -11,6 +14,7 @@ function setup() {
 	createCanvas(400, 400);
 	bRecording = false;
 	nElapsedFrames = 0;
+	//PetalOne = new Petal(1);
 }
 
 //=========================================
@@ -52,29 +56,98 @@ function draw() {
 function renderMyDesign(percent) {
 	//HERE IS WHERE YOUR DRAWING GOES
 	background(35);
-	stroke(0, 0, 0);
+	stroke(0);
 	strokeWeight(2);
-	//
-	let cx = 200;
-	let cy = 200;
-	//rotating element - look at this to figure out petals
-	// rotation variables
+	fill(255);
 
-	//colorMode(HSB);
-	push();
-	ellipseMode(CENTER);
 	let rotatingAngle = percent * TWO_PI;
-	let px = cx + 30 * cos(rotatingAngle);
-	let petalRadius = map(sin(rotatingAngle),-1,1,125,150);
+	//petal one
+	push();
+	let petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
 	translate(width / 2, height / 2);
 	rotate(rotatingAngle)
-
-	fill(255);
-	ellipse(petalRadius-50,0, petalRadius, 50);
-	
+	ellipse(petalRadius - 50, 0, petalRadius, 75);
 	pop();
-	fill(255,255,0);
-	ellipse(width/2, height/2, 100,100);
+	//petal two
+	push();
+	rotatingAngle = rotatingAngle + QUARTER_PI;
+	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
+	translate(width / 2, height / 2);
+	rotate(rotatingAngle);
+	ellipse(petalRadius - 50, 0, petalRadius, 75);
+	pop();
+	//petal three
+	push();
+	rotatingAngle = rotatingAngle + 2 * QUARTER_PI;
+	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
+	translate(width / 2, height / 2);
+	rotate(rotatingAngle)
+	ellipse(petalRadius - 50, 0, petalRadius, 75);
+	pop();
+	//petal four
+	push();
+	rotatingAngle = rotatingAngle + 3 * QUARTER_PI;
+	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
+	translate(width / 2, height / 2);
+	rotate(rotatingAngle)
+	ellipse(petalRadius - 50, 0, petalRadius, 75);
+	pop();
+	//petal five
+	push();
+	rotatingAngle = rotatingAngle + PI;
+	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
+	translate(width / 2, height / 2);
+	rotate(rotatingAngle)
+	ellipse(petalRadius - 50, 0, petalRadius, 75);
+	pop();
+	//petal six
+	push();
+	rotatingAngle = rotatingAngle + 5 * QUARTER_PI;
+	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
+	translate(width / 2, height / 2);
+	rotate(rotatingAngle)
+	ellipse(petalRadius - 50, 0, petalRadius, 75);
+	pop();
+	//petal seven
+	push();
+	rotatingAngle = rotatingAngle + 6 * QUARTER_PI;
+	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
+	translate(width / 2, height / 2);
+	rotate(rotatingAngle)
+	ellipse(petalRadius - 50, 0, petalRadius, 75);
+	pop();
+	//petal eight
+	push();
+	rotatingAngle = rotatingAngle + 7 * QUARTER_PI;
+	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
+	translate(width / 2, height / 2);
+	rotate(rotatingAngle)
+	ellipse(petalRadius - 50, 0, petalRadius, 75);
+	pop();
+	// 	//petal nine?!
+	// 	push();
+	// 	rotatingAngle = rotatingAngle ;
+	// 	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
+	// 	translate(width / 2, height / 2);
+	// 	rotate(rotatingAngle)
+	// 	ellipse(petalRadius - 50, 0, petalRadius, 75);
+	// 	pop();
+
+	//flower
+	fill(255, 255, 0);
+	ellipse(width / 2, height / 2, 100, 100);
+	fill(255);
+	ellipse(180, 195, 20);
+	ellipse(220, 195, 20)
+	fill(0);
+	ellipse(180, 195, 2);
+	ellipse(220, 195, 2);
+	strokeWeight(3);
+	line(190, 225, 210, 225);
+	strokeWeight(1);
+	noFill();
+	arc(180, 195, 30, 30, QUARTER_PI, PI - QUARTER_PI)
+	arc(220, 195, 30, 30, QUARTER_PI, PI - QUARTER_PI);
 	//pulsating ellipse - maybe add some leaves? or facial expression
 	// let ellipsePulse = sin(3.0 * percent * TWO_PI);
 	// let ellipseW = map(ellipsePulse, -1, 1, 20, 50);
