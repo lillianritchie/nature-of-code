@@ -4,7 +4,7 @@
 let bob;
 
 function setup() {
-	createCanvas(windowWidth, 600);
+	createCanvas(windowWidth, 500);
 	bob = new Critter();
 }
 

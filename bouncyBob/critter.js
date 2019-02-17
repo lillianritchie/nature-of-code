@@ -1,7 +1,7 @@
 class Critter {
   constructor() {
     this.mass = 1;
-    this.position = createVector(250, 100);
+    this.position = createVector(width/2, 50);
     this.velocity = createVector(0, 0);
     this.acceleration = createVector(0, 0);
   }
