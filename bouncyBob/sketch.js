@@ -4,16 +4,28 @@
 let bob;
 
 function setup() {
-	createCanvas(500, 500);
+	createCanvas(windowWidth, 600);
 	bob = new Critter();
 }
 
 function draw() {
 	background(51);
+	//declare force vectors
 	let gravity = createVector(0.0, 0.1);
-	//let wind = createVector(0.1,0.0);
+	let leftWind = createVector(-0.1, 0.0);
+	let rightWind = createVector(0.1, 0.0);
+	// exert gravity on bob
 	bob.applyForce(gravity);
-	//bob.applyForce(wind);
+	//blow bob left or right
+	if (keyIsDown(RIGHT_ARROW)) {
+		bob.applyForce(rightWind);
+	}
+	if (keyIsDown(LEFT_ARROW)) {
+		bob.applyForce(leftWind);
+	}
+	if (keyIsDown(32)){
+		bob.velocity.x = bob.velocity.x * 0.9;
+	}
 
 	bob.update();
 	bob.display();
