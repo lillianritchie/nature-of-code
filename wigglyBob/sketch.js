@@ -59,9 +59,9 @@ function renderMyDesign(percent) {
 	stroke(0);
 	strokeWeight(2);
 	fill(255);
-
+ //rotation variables
 	let rotatingAngle = percent * TWO_PI;
-	let standardAngle = percent * TWO_PI;
+	//let standardAngle = percent * TWO_PI;
 	let petalRadius = map(sin(rotatingAngle), -1, 1, 120, 150);
 	let hueValue = map(rotatingAngle, 0, TWO_PI, 0,360);
 	// DRAW PETALS
@@ -140,17 +140,10 @@ function renderMyDesign(percent) {
 	noFill();
 	arc(180, 195, 30, 30, QUARTER_PI, PI - QUARTER_PI)
 	arc(220, 195, 30, 30, QUARTER_PI, PI - QUARTER_PI);
-	//pulsating ellipse - maybe add some leaves? or facial expression
-	// let ellipsePulse = sin(3.0 * percent * TWO_PI);
-	// let ellipseW = map(ellipsePulse, -1, 1, 20, 50);
-	// let ellipseH = map(ellipsePulse, -1, 1, 50,30);
-	// let ellipseColor = map(ellipsePulse, -1,1, 128,255);
-	// fill(255,ellipseColor,ellipseColor);
-	// ellipse(cx,cy,ellipseW,ellipseH);
 
 	//visual feedback
 	fill(255, 0, 0);
 	noStroke();
 	let percentDisplayString = "" + nf(percent, 1, 3);
-	text(percentDisplayString, 5, 15);
+	//text(percentDisplayString, 5, 15);
 }
