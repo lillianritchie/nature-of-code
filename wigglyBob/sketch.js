@@ -1,6 +1,6 @@
 // modifiable global variables
 let myNickname = "wigglyBob";
-let nFramesInLoop = 200;
+let nFramesInLoop = 240;
 let bEnableExport = true;
 let petalOne;
 let petalTwo;
@@ -14,7 +14,7 @@ function setup() {
 	createCanvas(400, 400);
 	bRecording = false;
 	nElapsedFrames = 0;
-	//PetalOne = new Petal(1);
+	
 }
 
 //=========================================
@@ -55,15 +55,20 @@ function draw() {
 //========================================
 function renderMyDesign(percent) {
 	//HERE IS WHERE YOUR DRAWING GOES
-	background(35);
+	background(25);
 	stroke(0);
 	strokeWeight(2);
 	fill(255);
 
 	let rotatingAngle = percent * TWO_PI;
+	let standardAngle = percent * TWO_PI;
+	let petalRadius = map(sin(rotatingAngle), -1, 1, 120, 150);
+	let hueValue = map(rotatingAngle, 0, TWO_PI, 0,360);
+	// DRAW PETALS
+	colorMode(HSB);
+	fill(hueValue, 80, 60);
 	//petal one
 	push();
-	let petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
 	translate(width / 2, height / 2);
 	rotate(rotatingAngle)
 	ellipse(petalRadius - 50, 0, petalRadius, 75);
@@ -71,7 +76,6 @@ function renderMyDesign(percent) {
 	//petal two
 	push();
 	rotatingAngle = rotatingAngle + QUARTER_PI;
-	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
 	translate(width / 2, height / 2);
 	rotate(rotatingAngle);
 	ellipse(petalRadius - 50, 0, petalRadius, 75);
@@ -79,7 +83,6 @@ function renderMyDesign(percent) {
 	//petal three
 	push();
 	rotatingAngle = rotatingAngle + 2 * QUARTER_PI;
-	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
 	translate(width / 2, height / 2);
 	rotate(rotatingAngle)
 	ellipse(petalRadius - 50, 0, petalRadius, 75);
@@ -87,7 +90,6 @@ function renderMyDesign(percent) {
 	//petal four
 	push();
 	rotatingAngle = rotatingAngle + 3 * QUARTER_PI;
-	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
 	translate(width / 2, height / 2);
 	rotate(rotatingAngle)
 	ellipse(petalRadius - 50, 0, petalRadius, 75);
@@ -95,7 +97,6 @@ function renderMyDesign(percent) {
 	//petal five
 	push();
 	rotatingAngle = rotatingAngle + PI;
-	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
 	translate(width / 2, height / 2);
 	rotate(rotatingAngle)
 	ellipse(petalRadius - 50, 0, petalRadius, 75);
@@ -103,7 +104,6 @@ function renderMyDesign(percent) {
 	//petal six
 	push();
 	rotatingAngle = rotatingAngle + 5 * QUARTER_PI;
-	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
 	translate(width / 2, height / 2);
 	rotate(rotatingAngle)
 	ellipse(petalRadius - 50, 0, petalRadius, 75);
@@ -111,7 +111,6 @@ function renderMyDesign(percent) {
 	//petal seven
 	push();
 	rotatingAngle = rotatingAngle + 6 * QUARTER_PI;
-	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
 	translate(width / 2, height / 2);
 	rotate(rotatingAngle)
 	ellipse(petalRadius - 50, 0, petalRadius, 75);
@@ -119,21 +118,14 @@ function renderMyDesign(percent) {
 	//petal eight
 	push();
 	rotatingAngle = rotatingAngle + 7 * QUARTER_PI;
-	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
 	translate(width / 2, height / 2);
 	rotate(rotatingAngle)
 	ellipse(petalRadius - 50, 0, petalRadius, 75);
 	pop();
-	// 	//petal nine?!
-	// 	push();
-	// 	rotatingAngle = rotatingAngle ;
-	// 	petalRadius = map(sin(rotatingAngle), -1, 1, 125, 150);
-	// 	translate(width / 2, height / 2);
-	// 	rotate(rotatingAngle)
-	// 	ellipse(petalRadius - 50, 0, petalRadius, 75);
-	// 	pop();
+
 
 	//flower
+	colorMode(RGB);
 	fill(255, 255, 0);
 	ellipse(width / 2, height / 2, 100, 100);
 	fill(255);
