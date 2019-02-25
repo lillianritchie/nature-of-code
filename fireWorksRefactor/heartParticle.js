@@ -1,0 +1,3 @@
+class HeartParticle extends Particle {
+
+}
