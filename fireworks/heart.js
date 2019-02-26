@@ -1,12 +1,13 @@
 class Heart extends Particle {
-  constructor(x,y,hu){
+  constructor(x,y,hu,velX,velY){
     super();
     this.pos = createVector(x,y);
     this.lifespan = 255;
     this.hu = hu;
     this.acc = createVector(0,0);
-    this.vel = p5.Vector.random2D();
-    this.vel.mult(random(7,8));
+    this.vel = createVector(velX,velY);
+    this.vel.mult(random(0.7,0.9));
+
   }
 
   update(){

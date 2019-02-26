@@ -36,15 +36,17 @@ class Firework {
   }
 
   explode() {
-    if (this.hu < 300 && this.hu >20) {
+    if (this.hu < 300 && this.hu > 20) {
       for (let i = 0; i < 100; i++) {
         const b = new Blast(this.firework.pos.x, this.firework.pos.y, this.hu);
         this.particles.push(b);
       }
     } else {
-      for (let i = 0; i < 100; i++) {
-      const h = new Heart(this.firework.pos.x, this.firework.pos.y, this.hu);
-      this.particles.push(h);
+      for (let j = 0; j < TWO_PI; j = j + (TWO_PI / 100)) {
+        var velX = (16 * pow(sin(j), 3)) * -1;
+        var velY = (13 * cos(j) - 5 * cos(j * 2) - 2 * cos(j * 3) - cos(j * 4)) * -1;
+        const h = new Heart(this.firework.pos.x, this.firework.pos.y, this.hu, velX, velY);
+        this.particles.push(h);
       }
     }
   }
