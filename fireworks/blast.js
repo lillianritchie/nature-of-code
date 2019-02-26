@@ -1,6 +1,10 @@
 class Blast extends Particle {
   constructor(x,y,hu) {
     super();
+    this.pos = createVector(x,y);
+    this.lifespan = 255;
+    this.hu = hu;
+    this.acc = createVector(0,0);
     this.vel = p5.Vector.random2D();
     this.vel.mult(random(2,10));
   }
