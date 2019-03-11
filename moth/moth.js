@@ -33,12 +33,15 @@ class Moth {
   }
 
   zap() {
-    for (let i = 0; i < 50; i++) {
-      const d = new Dust(this.position.x, this.position.y);
-      this.particles.push(d);
-      this.particles.zap();
-      this.particles.display();
+    if (this.dead()) {
+      for (let i = 0; i < 50; i++) {
+        const d = new Dust(this.position.x, this.position.y);
+        this.particles.push(d);
+        this.particles.update(d);
+        this.particles.display(d);
+      }
     }
+    
   }
 
 }

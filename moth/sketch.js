@@ -25,10 +25,10 @@ function draw() {
   for (i = 0; i < moths.length; i++) {
     moths[i].update();
     moths[i].display();
+    moths[i].zap();
 
     if (moths[i].dead()) {
       moths.splice(i, 1);
-     // moths[i].zap();
       console.log(moths.length);
     }
 
