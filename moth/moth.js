@@ -1,14 +1,14 @@
 class Moth {
   constructor() {
-    this.position = createVector(random(width), random(0, height + height));
+    this.position = createVector(random(width), random(0, height));
     this.noff = createVector(random(100), 1);
-    this.speed = random(0, 0.03);
+    this.speed = random(0, 0.02);
     this.particles = [];
   }
 
   update() {
     this.position.x = map(noise(this.noff.x), 0, 1, -200, width + 200);
-    this.position.y = this.position.y + random(-5, 4);
+    this.position.y = this.position.y + random(-6, 5);
     this.noff.add(this.speed, this.speed);
 
     if (this.position.y < 0 && this.position.x < width * 3 / 8 && this.position.x > width * 5 / 8) {
@@ -36,8 +36,6 @@ class Moth {
       for (let i = 0; i < 50; i++) {
         const d = new Dust(this.position.x, this.position.y);
         this.particles.push(d); // particles is an array of Dust.
-        // this.particles.update(d);
-        // this.particles.display(d);
       }
     }
 
@@ -70,8 +68,29 @@ class Dust {
   }
 
   display() {
-    strokeWeight(3);
+    strokeWeight(5);
     stroke(100, 100, 100, 100);
     point(this.position.x, this.position.y);
+  }
+}
+
+class Survivor {
+  constructor() {
+    this.position = createVector(random(width), random(0, height));
+    this.noff = createVector(random(100), random(10));
+    this.speed = 0.01;
+  }
+
+  update() {
+    this.position.x = map(noise(this.noff.x), 0, 1, -200, width + 200);
+    this.position.y = map(noise(this.noff.y), 0, 1, height, 0)
+    this.noff.add(this.speed, this.speed);
+  }
+
+  display() {
+    fill(150, 150, 150, 100);
+    ellipse(this.position.x, this.position.y, 5);
+    ellipse(this.position.x, this.position.y, 7);
+    ellipse(this.position.x, this.position.y, 10);
   }
 }
