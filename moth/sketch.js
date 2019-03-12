@@ -23,13 +23,17 @@ function draw() {
 
   fill
   for (i = 0; i < moths.length; i++) {
-    moths[i].update();
-    moths[i].display();
-    moths[i].zap();
-
+    
     if (moths[i].dead()) {
-      moths.splice(i, 1);
-      console.log(moths.length);
+      // dead flow
+      moths[i].displayDust(); //we will add this function
+      // moths.splice(i, 1);
+      // console.log(moths.length);
+    }else{
+      // alive flow
+      moths[i].update();
+      moths[i].display();
+      moths[i].zap();
     }
 
   }

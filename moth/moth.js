@@ -1,14 +1,13 @@
 class Moth {
   constructor() {
-    this.position = createVector(random(width + 100), random(height, height + height));
+    this.position = createVector(random(width), random(0, height + height));
     this.noff = createVector(random(100), 1);
     this.speed = random(0, 0.03);
     this.particles = [];
-
   }
 
   update() {
-    this.position.x = map(noise(this.noff.x), 0, 1, 0, width);
+    this.position.x = map(noise(this.noff.x), 0, 1, -200, width + 200);
     this.position.y = this.position.y + random(-5, 4);
     this.noff.add(this.speed, this.speed);
 
@@ -36,12 +35,22 @@ class Moth {
     if (this.dead()) {
       for (let i = 0; i < 50; i++) {
         const d = new Dust(this.position.x, this.position.y);
-        this.particles.push(d);
-        this.particles.update(d);
-        this.particles.display(d);
+        this.particles.push(d); // particles is an array of Dust.
+        // this.particles.update(d);
+        // this.particles.display(d);
       }
     }
-    
+
+  }
+
+  displayDust() {
+    //for loop of all particles
+    //call update
+    //display
+    this.particles.forEach(p => {
+      p.update()
+      p.display()
+    })
   }
 
 }
@@ -62,7 +71,7 @@ class Dust {
 
   display() {
     strokeWeight(3);
-    stroke(100,100,100,100);
+    stroke(100, 100, 100, 100);
     point(this.position.x, this.position.y);
   }
 }
