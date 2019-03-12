@@ -4,3 +4,4 @@ Classwork for Nature of Code
 * Week 2 Assignment | Forces and Vectors | [Bouncy Bob](https://lillianritchie.github.io/nature-of-code/bouncyBob/)
 * Week 3 Assignment | Oscillation | [Flower Bob](https://lillianritchie.github.io/nature-of-code/wigglyBob/)
 * Week 4 Assignment | Particle Systems | [Fireworks with Hearts](https://lillianritchie.github.io/nature-of-code/fireworks/)
+* Weeks 5 & 6 | Simulation Assignment | [Moths vs. Lamp](https://lillianritchie.github.io/nature-of-code/moth/)
