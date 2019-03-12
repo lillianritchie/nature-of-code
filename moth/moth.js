@@ -61,21 +61,25 @@ class Moth {
 class Dust {
   constructor(x, y) {
     this.position = createVector(x, y);
-    this.velocity = p5.Vector.random2D();
-    this.velocity.mult(random(2, 10));
-    this.acceleration = createVector(0, 0);
+    this.velocity = createVector(random(-0.4,0.4), random(0.01,0.4));
+    this.velocity.mult(random(1, 5));
+    this.acceleration = createVector(0, 0.1);
   }
 
   update() {
     this.velocity.add(this.acceleration);
     this.position.add(this.velocity);
-    this.acceleration.mult(0);
+    // this.acceleration.mult(0);
   }
 
   display() {
-    strokeWeight(5);
-    stroke(100, 100, 100, 100);
-    point(this.position.x, this.position.y);
+    if (this.position.x >= 3 / 8 * width && this.position.x <= 5 / 8 * width && this.position.y <= height / 20){
+      fill(255,255,150);
+      ellipse(this.position.x, this.position.y,15);
+    } else {
+    fill(100, 100, 100, 100);
+    ellipse(this.position.x, this.position.y,7);
+    }
   }
 }
 

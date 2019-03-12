@@ -42,9 +42,7 @@ function draw() {
 
     if (moths[i].done){
       moths.splice(i,1);
-      
       moths.push(new Moth());
-
     }
   
   }
