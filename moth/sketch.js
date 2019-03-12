@@ -33,15 +33,20 @@ function draw() {
     if (moths[i].dead()) {
       // dead flow
       moths[i].displayDust();
-     // moths.push(new Moth);
-
     } else {
       // alive flow
       moths[i].update();
       moths[i].display();
       moths[i].zap();
     }
-    
+
+    if (moths[i].done){
+      moths.splice(i,1);
+      
+      moths.push(new Moth());
+
+    }
+  
   }
   
     

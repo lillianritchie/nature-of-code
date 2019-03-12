@@ -4,11 +4,12 @@ class Moth {
     this.noff = createVector(random(100), 1);
     this.speed = random(0, 0.02);
     this.particles = [];
+    this.done = false;
   }
 
   update() {
     this.position.x = map(noise(this.noff.x), 0, 1, -200, width + 200);
-    this.position.y = this.position.y + random(-6, 5);
+    this.position.y = this.position.y + random(-5, 5);
     this.noff.add(this.speed, this.speed);
 
     if (this.position.y < 0 && this.position.x < width * 3 / 8 && this.position.x > width * 5 / 8) {
@@ -48,6 +49,10 @@ class Moth {
     this.particles.forEach(p => {
       p.update()
       p.display()
+
+      if (p.position.y >= height){
+        this.done = true;
+      }
     })
   }
 
