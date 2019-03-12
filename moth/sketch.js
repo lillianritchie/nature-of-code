@@ -3,7 +3,7 @@ let survivors = [];
 //let walker1;
 
 function setup() {
-  createCanvas(windowWidth, 500);
+  createCanvas(windowWidth, windowHeight);
 
   for (i = 0; i < 20; i++) {
     moths.push(new Moth());
