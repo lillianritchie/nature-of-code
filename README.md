@@ -6,3 +6,4 @@ Classwork for Nature of Code
 * Assignment 4 | Particle Systems | [Fireworks with Hearts](https://lillianritchie.github.io/nature-of-code/fireworks/)
 * Simulation Assignment | [Moths vs. Lamp](https://lillianritchie.github.io/nature-of-code/moth/)
 * Assignment 5 | Genetic Algorithms | [Smart Rockets with Gas](https://lillianritchie.github.io/nature-of-code/smartRocketsGas)
+* Assignment 6 | Neural Networks | [Emotional Stability Test](https://lillianritchie.github.io/nature-of-code/emotionalStability)
