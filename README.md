@@ -8,3 +8,4 @@ Classwork for Nature of Code
 * Assignment 5 | Genetic Algorithms | [Smart Rockets with Gas](https://lillianritchie.github.io/nature-of-code/smartRocketsGas)
 * Assignment 6 | Neural Networks | [Emotional Stability Test](https://lillianritchie.github.io/nature-of-code/emotionalStability)
 * Final Prep | Experiment | [Steer with your Nose](https://lillianritchie.github.io/nature-of-code/steeringExperimentMl5)
+* Final Prep | Experiment | 
