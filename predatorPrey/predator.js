@@ -73,7 +73,7 @@ class Predator {
     // Steering = Desired minus velocity
     let steer = p5.Vector.sub(desired, this.velocity);
     steer.limit(this.maxforce); // Limit to maximum steering force
-    if (eyesight < 50) {
+    if (eyesight < 200) {
       return steer;
     } else {
       return this.velocity
@@ -109,9 +109,12 @@ class Predator {
     if (this.position.y > height + this.r) this.position.y = -this.r;
   }
 
-  procreate() {
-    if (this.position.x < (mouseX + this.r) && this.position.x > (mouseX - this.r) && this.position.y > (mouseY - this.r) && this.position.y < (mouseY - this.r)) {
-      console.log('worked')
+  isOver (mX, mY) {
+    if (dist(mX, mY, this.position.x, this.position.y) < this.r ){
+      return true;
+    }
+    else {
+      return false;
     }
   }
 }

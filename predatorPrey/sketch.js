@@ -1,14 +1,11 @@
- // The Nature of Code
- // Daniel Shiffman
- // http://natureofcode.com
 
- // Separation
- // Via Reynolds: http://www.red3d.com/cwr/steer/
 
  // A list of predators
  let predators = [];
+ //a list of prey
  let preys = [];
 
+ //hard coded slider values
  let slider1 = 4;
  let slider2 = 4;
  let slider3 = 40;
@@ -16,11 +13,13 @@
  function setup() {
 
  	createCanvas(720, 480);
- 	// We are now making random predators and storing them in an array
+ 	// filling the array of predators
  	for (let i = 0; i < 10; i++) {
  		predators.push(new Predator(random(width), random(height)));
- 		preys.push(new Prey(random(width), random(height)));
- 	}
+	 }
+	 for(let i = 0; i < 100; i++){
+		 preys.push(new Prey(random(width), random(height)));
+	 }
  	//createP("sliders");
  	// slider1 = createSlider(0, 8, 4);
  	// slider1.position(20, 30);
@@ -45,12 +44,24 @@
  		v.borders();
  		v.display();
  		// add a predator if a predator catches you
- 		}
- 	
- 	for (let v of preys) {
- 		v.applyBehaviors(preys);
- 		v.update();
- 		v.borders();
- 		v.display();
  	}
- }
+
+ 	for (let i of predators) {
+ 		if (i.isOver(mouseX, mouseY)) {
+ 			predators.splice(i, 1);
+			 predators.push(new Predator(random(width), 0));
+			// predators.push(new Predator(random(width), random(height)));
+ 			console.log(predators.length)
+		 }
+		}
+
+ 		for (let v of preys) {
+ 			v.applyBehaviors(preys);
+ 			v.update();
+ 			v.borders();
+			 v.display();
+			 if(v.isOver(mouseX,mouseY)) {
+				 preys.splice(v,1)
+			 }
+ 		}
+ 	}

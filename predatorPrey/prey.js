@@ -114,4 +114,13 @@ class Prey {
     if (this.position.x > width + this.r) this.position.x = -this.r;
     if (this.position.y > height + this.r) this.position.y = -this.r;
   }
+
+  isOver (mX, mY) {
+    if (dist(mX, mY, this.position.x, this.position.y) < this.r ){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }
