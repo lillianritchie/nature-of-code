@@ -1,0 +1,108 @@
+// A list of predators
+let predators = [];
+//a list of prey
+let preys = [];
+
+//hard coded slider values
+let slider1 = 4;
+let slider2 = 4;
+let slider3 = 40;
+
+//posenet variables
+let video;
+let poseNet;
+let poses = [];
+let player;
+
+function setup() {
+
+	createCanvas(800, 600);
+	// filling the array of predators
+	for (let i = 0; i < 10; i++) {
+		predators.push(new Predator(random(width), random(height)));
+	}
+	for (let i = 0; i < 100; i++) {
+		preys.push(new Prey(random(width), random(height)));
+	}
+
+	video = createCapture(video);
+	video.size(width, height);
+	// Create a new poseNet method with a single detection
+	poseNet = ml5.poseNet(video, modelReady);
+	// This sets up an event that fills the global variable "poses"
+	// with an array every time new poses are detected
+	poseNet.on('pose', function (results) {
+		poses = results;
+	});
+	// Hide the video element, and just show the canvas
+	video.hide();
+
+	//createP("sliders");
+	// slider1 = createSlider(0, 8, 4);
+	// slider1.position(20, 30);
+	// slider2 = createSlider(0, 8, 4);
+	// slider2.position(20, 70);
+	// slider3 = createSlider(10, 160, 24);
+	// slider3.position(20, 110);
+}
+
+function modelReady() {
+  select('#status').html('Model Loaded');
+}
+
+function draw() {
+	background(51);
+	image(video, 0, 0, width, height);
+	fill(255);
+	textSize(16);
+	noStroke();
+	drawKeypoints();
+	//text('separate force: ' + slider1.value(), 30, 20);
+	// text('seek force: ' + slider2.value(), 30, 60);
+	// text('desired separation: ' + slider3.value(), 30, 100);
+
+	for (let v of predators) {
+		v.applyBehaviors(predators);
+		v.update();
+		v.borders();
+		v.display();
+		// add a predator if a predator catches you
+	}
+
+	for (let i of predators) {
+		if (i.isOver(mouseX, mouseY)) {
+			predators.splice(i, 1);
+			predators.push(new Predator(random(width), 0));
+			// predators.push(new Predator(random(width), random(height)));
+			console.log(predators.length)
+		}
+	}
+
+	for (let v of preys) {
+		v.applyBehaviors(preys);
+		v.update();
+		v.borders();
+		v.display();
+		if (v.isOver(mouseX, mouseY)) {
+			preys.splice(v, 1)
+		}
+	}
+}
+
+function drawKeypoints() {
+	// Loop through all the poses detected
+	for (let i = 0; i < poses.length; i++) {
+		// For each pose detected, look for the nose
+		let pose = poses[i].pose;
+		for (let j = 0; j < 2; j++) {
+			// A keypoint is an object describing a body part (like rightArm or leftShoulder)
+			let keypoint = pose.keypoints[j];
+			// Only place a googly eye is the pose probability is bigger than 0.2
+			if (j == 0 && keypoint.score > 0.2) {
+				fill(255);
+				noStroke();
+				ellipse(keypoint.position.x, keypoint.position.y, 20, 20);
+			}
+		}
+	}
+}
