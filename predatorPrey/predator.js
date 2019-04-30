@@ -5,7 +5,7 @@ class Predator {
     // All the usual stuff
     this.position = createVector(x, y);
     this.r = 12;
-    this.maxspeed = random(1, 3); // Maximum speed
+    this.maxspeed = random(1, 2.5); // Maximum speed
     this.maxforce = random(0, 0.3); // Maximum steering force
     this.acceleration = createVector(0, 0);
     this.velocity = createVector(random(-1, 1), random(-1, 1));

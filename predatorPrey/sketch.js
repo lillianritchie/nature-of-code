@@ -12,7 +12,7 @@
 
  function setup() {
 
- 	createCanvas(720, 480);
+ 	createCanvas(800, 600);
  	// filling the array of predators
  	for (let i = 0; i < 10; i++) {
  		predators.push(new Predator(random(width), random(height)));
