@@ -47,7 +47,7 @@ function setup() {
 }
 
 function modelReady() {
-  select('#status').html('Model Loaded');
+	select('#status').html('Model Loaded');
 }
 
 function draw() {
@@ -61,32 +61,6 @@ function draw() {
 	// text('seek force: ' + slider2.value(), 30, 60);
 	// text('desired separation: ' + slider3.value(), 30, 100);
 
-	for (let v of predators) {
-		v.applyBehaviors(predators);
-		v.update();
-		v.borders();
-		v.display();
-		// add a predator if a predator catches you
-	}
-
-	for (let i of predators) {
-		if (i.isOver(mouseX, mouseY)) {
-			predators.splice(i, 1);
-			predators.push(new Predator(random(width), 0));
-			// predators.push(new Predator(random(width), random(height)));
-			console.log(predators.length)
-		}
-	}
-
-	for (let v of preys) {
-		v.applyBehaviors(preys);
-		v.update();
-		v.borders();
-		v.display();
-		if (v.isOver(mouseX, mouseY)) {
-			preys.splice(v, 1)
-		}
-	}
 }
 
 function drawKeypoints() {
@@ -94,14 +68,32 @@ function drawKeypoints() {
 	for (let i = 0; i < poses.length; i++) {
 		// For each pose detected, look for the nose
 		let pose = poses[i].pose;
-		for (let j = 0; j < 2; j++) {
-			// A keypoint is an object describing a body part (like rightArm or leftShoulder)
-			let keypoint = pose.keypoints[j];
-			// Only place a googly eye is the pose probability is bigger than 0.2
-			if (j == 0 && keypoint.score > 0.2) {
-				fill(255);
-				noStroke();
-				ellipse(keypoint.position.x, keypoint.position.y, 20, 20);
+		let keypoint = pose.keypoints[0];
+		// Only place a googly eye is the pose probability is bigger than 0.2
+		if (keypoint.score > 0.2) {
+			fill(255);
+			noStroke();
+			ellipse(keypoint.position.x, keypoint.position.y, 40, 40);
+		}
+		for (let v of predators) {
+			v.applyBehaviors(predators, keypoint.position.x, keypoint.position.y);
+			v.update();
+			v.borders();
+			v.display();
+			if (v.isOver(keypoint.position.x, keypoint.position.y)) {
+				predators.splice(i, 1);
+				predators.push(new Predator(random(width), 0));
+			}
+		}
+
+		for (let v of preys) {
+			v.applyBehaviors(preys);
+			v.update();
+			v.borders();
+			v.display();
+			if (v.isOver(keypoint.position.x, keypoint.position.y)) {
+				preys.splice(v, 1)
+				console.log("prey left: " + preys.length)
 			}
 		}
 	}

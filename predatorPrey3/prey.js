@@ -15,10 +15,10 @@ class Prey {
     this.velocity = createVector(random(-1,1), random(-1,1));
   }
 
-  applyBehaviors(preys) {
+  applyBehaviors(preys, mX, mY) {
 
     let separateForce = this.separate(preys);
-    let fleeForce = this.flee(createVector(mouseX, mouseY));
+    let fleeForce = this.flee(createVector(mX, mY));
 
     separateForce.mult(slider1);
     fleeForce.mult(slider2);
@@ -116,7 +116,7 @@ class Prey {
   }
 
   isOver (mX, mY) {
-    if (dist(mX, mY, this.position.x, this.position.y) < this.r ){
+    if (dist(mX, mY, this.position.x, this.position.y) < 30 ){
       return true;
     }
     else {

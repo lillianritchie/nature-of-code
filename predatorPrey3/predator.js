@@ -11,10 +11,10 @@ class Predator {
     this.velocity = createVector(random(-1, 1), random(-1, 1));
   }
 
-  applyBehaviors(predators) {
+  applyBehaviors(predators, mX,mY) {
 
     let separateForce = this.separate(predators);
-    let seekForce = this.seek(createVector(mouseX, mouseY));
+    let seekForce = this.seek(createVector(mX, mY));
 
     separateForce.mult(slider1);
     seekForce.mult(slider2);
