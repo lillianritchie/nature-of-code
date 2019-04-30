@@ -1,4 +1,3 @@
-
 // Vehicle object
 
 class Predator {
@@ -6,10 +5,10 @@ class Predator {
     // All the usual stuff
     this.position = createVector(x, y);
     this.r = 12;
-    this.maxspeed = random(1,3); // Maximum speed
-    this.maxforce = random(0,0.3); // Maximum steering force
+    this.maxspeed = random(1, 3); // Maximum speed
+    this.maxforce = random(0, 0.3); // Maximum steering force
     this.acceleration = createVector(0, 0);
-    this.velocity = createVector(0, 0);
+    this.velocity = createVector(random(-1, 1), random(-1, 1));
   }
 
   applyBehaviors(predators) {
@@ -17,8 +16,8 @@ class Predator {
     let separateForce = this.separate(predators);
     let seekForce = this.seek(createVector(mouseX, mouseY));
 
-    separateForce.mult(slider1.value());
-    seekForce.mult(slider2.value());
+    separateForce.mult(slider1);
+    seekForce.mult(slider2);
 
     this.applyForce(separateForce);
     this.applyForce(seekForce);
@@ -32,7 +31,7 @@ class Predator {
   // Separation
   // Method checks for nearby predators and steers away
   separate(predators) {
-    let desiredseparation = slider3.value();
+    let desiredseparation = slider3;
     let sum = createVector();
     let count = 0;
     // For every boid in the system, check if it's too close
@@ -66,13 +65,19 @@ class Predator {
   seek(target) {
     let desired = p5.Vector.sub(target, this.position); // A vector pointing from the location to the target
 
+    let eyesight = desired.mag();
+
     // Normalize desired and scale to maximum speed
     desired.normalize();
     desired.mult(this.maxspeed);
     // Steering = Desired minus velocity
     let steer = p5.Vector.sub(desired, this.velocity);
     steer.limit(this.maxforce); // Limit to maximum steering force
-    return steer;
+    if (eyesight < 50) {
+      return steer;
+    } else {
+      return this.velocity
+    }
   }
 
   // Method to update location
@@ -87,7 +92,7 @@ class Predator {
   }
 
   display() {
-    fill(127,0,0);
+    fill(127, 0, 0);
     stroke(200);
     strokeWeight(2);
     push();
@@ -102,5 +107,11 @@ class Predator {
     if (this.position.y < -this.r) this.position.y = height + this.r;
     if (this.position.x > width + this.r) this.position.x = -this.r;
     if (this.position.y > height + this.r) this.position.y = -this.r;
+  }
+
+  procreate() {
+    if (this.position.x < (mouseX + this.r) && this.position.x > (mouseX - this.r) && this.position.y > (mouseY - this.r) && this.position.y < (mouseY - this.r)) {
+      console.log('worked')
+    }
   }
 }

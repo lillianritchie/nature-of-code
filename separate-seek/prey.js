@@ -9,22 +9,22 @@ class Prey {
     // All the usual stuff
     this.position = createVector(x, y);
     this.r = 8;
-    this.maxspeed = random(1, 5); // Maximum speed
-    this.maxforce = random(0, 0.2); // Maximum steering force
+    this.maxspeed = random(1, 4); // Maximum speed
+    this.maxforce = random(0, 0.05); // Maximum steering force has to be weak enough for you to hit prey
     this.acceleration = createVector(0, 0);
-    this.velocity = createVector(0, 0);
+    this.velocity = createVector(random(-1,1), random(-1,1));
   }
 
   applyBehaviors(preys) {
 
     let separateForce = this.separate(preys);
-    let seekForce = this.seek(createVector(mouseX, mouseY));
+    let fleeForce = this.flee(createVector(mouseX, mouseY));
 
-    separateForce.mult(slider1.value());
-    seekForce.mult(slider2.value());
+    separateForce.mult(slider1);
+    fleeForce.mult(slider2);
 
     this.applyForce(separateForce);
-    this.applyForce(seekForce);
+    this.applyForce(fleeForce);
   }
 
   applyForce(force) {
@@ -35,7 +35,7 @@ class Prey {
   // Separation
   // Method checks for nearby preys and steers away
   separate(preys) {
-    let desiredseparation = slider3.value();
+    let desiredseparation = slider3;
     let sum = createVector();
     let count = 0;
     // For every boid in the system, check if it's too close
@@ -66,21 +66,25 @@ class Prey {
 
   // A method that calculates a steering force towards a target
   // STEER = DESIRED MINUS VELOCITY
-  seek(target) {
-    let desired = p5.Vector.sub(this.position, 0.5 * target); // A vector pointing from the location to the target
-
-    // Normalize desired and scale to maximum speed
-    desired.normalize();
-    desired.mult(this.maxspeed);
-    // Steering = Desired minus velocity
-    let steer = p5.Vector.sub(desired, this.velocity);
-    steer.limit(this.maxforce); // Limit to maximum steering force
-    return steer;
-  }
-
   flee(target) {
+    let desired = p5.Vector.sub(this.position, target); // A vector pointing from the target to the location
+    let eyesight = desired.mag();
 
+      // Normalize desired and scale to maximum speed
+      desired.normalize();
+      desired.mult(this.maxspeed);
+      // Steering = Desired minus velocity
+      let steer = p5.Vector.sub(desired, this.velocity);
+      steer.limit(this.maxforce); // Limit to maximum steering force
+      if (eyesight < 50){
+      return steer;
+      } else {
+        return this.velocity;
+      }
+    
   }
+
+
 
   // Method to update location
   update() {
@@ -105,8 +109,8 @@ class Prey {
 
   // Wraparound
   borders() {
-    if (this.position.x < -this.r) this.velocity.x = - this.velocity.x;
-    if (this.position.y < -this.r) this.velocity.y = - this.velocity.y;
+    if (this.position.x < -this.r) this.position.x = this.position.x + width;
+    if (this.position.y < -this.r) this.position.y = this.position.y + height;
     if (this.position.x > width + this.r) this.position.x = -this.r;
     if (this.position.y > height + this.r) this.position.y = -this.r;
   }
