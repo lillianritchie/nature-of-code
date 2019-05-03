@@ -9,7 +9,7 @@ class Prey {
     // All the usual stuff
     this.position = createVector(x, y);
     this.r = 15;
-    this.maxspeed = random(1, 4); // Maximum speed
+    this.maxspeed = random(1, 3); // Maximum speed
     this.maxforce = random(0, 0.05); // Maximum steering force has to be weak enough for you to hit prey
     this.acceleration = createVector(0, 0);
     this.velocity = createVector(random(-1,1), random(-1,1));
@@ -38,7 +38,7 @@ class Prey {
     let desiredseparation = slider3;
     let sum = createVector();
     let count = 0;
-    // For every boid in the system, check if it's too close
+    // For every prey in the system, check if it's too close
     for (let i = 0; i < preys.length; i++) {
       let d = p5.Vector.dist(this.position, preys[i].position);
       // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)

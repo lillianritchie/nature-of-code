@@ -33,7 +33,7 @@ function setup() {
 	for (let i = 0; i < 5; i++) {
 		predators.push(new Predator(random(width), random(height)));
 	}
-	for (let i = 0; i < 50; i++) {
+	for (let i = 0; i < 10; i++) {
 		preys.push(new Prey(random(width), random(height)));
 	}
 
@@ -84,9 +84,9 @@ function draw() {
 
 function drawKeypoints() {
 	// Loop through all the poses detected
-	for (let i = 0; i < poses.length; i++) {
+	if ( poses.length > 0) {
 		// For each pose detected, look for the nose
-		let pose = poses[i].pose;
+		let pose = poses[0].pose;
 		let keypoint = pose.keypoints[0];
 		// Only place a googly eye is the pose probability is bigger than 0.2
 		if (keypoint.score > 0.2) {
@@ -100,7 +100,7 @@ function drawKeypoints() {
 			v.borders();
 			v.display();
 			if (v.isOver(keypoint.position.x, keypoint.position.y)) {
-				predators.splice(i, 1);
+				predators.splice(v, 1);
 				predators.push(new Predator(random(width), 0));
 			}
 		}
@@ -112,6 +112,7 @@ function drawKeypoints() {
 			v.display();
 			if (v.isOver(keypoint.position.x, keypoint.position.y)) {
 				preys.splice(v, 1)
+				preys.push(new Prey(random(width), 0));
 				console.log("prey left: " + preys.length)
 			}
 		}

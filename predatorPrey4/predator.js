@@ -4,7 +4,7 @@ class Predator {
   constructor(x, y) {
     this.position = createVector(x, y); // initiate at a random spot
     this.r = 20; // size of the fish
-    this.maxspeed = random(1, 2.5); // Maximum speed
+    this.maxspeed = random(0.5, 2); // Maximum speed
     this.maxforce = random(0, 0.3); // Maximum steering force
     this.acceleration = createVector(0, 0); //start the fish at a constant velocity
     this.velocity = createVector(random(-1, 1), random(-1, 1)); //start the fish moving in a random direction
