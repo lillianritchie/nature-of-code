@@ -84,8 +84,6 @@ class Prey {
     
   }
 
-
-
   // Method to update location
   update() {
     // Update velocity

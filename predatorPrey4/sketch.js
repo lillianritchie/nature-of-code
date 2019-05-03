@@ -13,7 +13,6 @@ let video;
 let poseNet;
 let poses = [];
 
-
 //images
 let aquarium;
 let badFish;
@@ -21,9 +20,7 @@ let goodFish;
 let nose;
 const flipHorizontal = true;
 
-
-
-
+// setup function!
 function setup() {
 
 	createCanvas(800, 600);
@@ -31,12 +28,12 @@ function setup() {
 	badFish = loadImage('/assets/piranha3.png');
 	goodFish = loadImage('assets//prey3.png');
 	nose = loadImage('/assets/nose.png')
-	
+
 	// filling the array of predators
-	for (let i = 0; i < 10; i++) {
+	for (let i = 0; i < 5; i++) {
 		predators.push(new Predator(random(width), random(height)));
 	}
-	for (let i = 0; i < 100; i++) {
+	for (let i = 0; i < 50; i++) {
 		preys.push(new Prey(random(width), random(height)));
 	}
 
@@ -67,11 +64,11 @@ function modelReady() {
 
 
 function draw() {
-	//image(aquarium,0,0,width,height);
+
 	push();
 	translate(video.width, 0);
-	scale(-1,1);
-	image(aquarium,0,0,width,height);
+	scale(-1, 1);
+	image(aquarium, 0, 0, width, height);
 	fill(255);
 	textSize(16);
 	noStroke();
@@ -79,7 +76,6 @@ function draw() {
 	pop();
 
 
-	
 	//text('separate force: ' + slider1.value(), 30, 20);
 	// text('seek force: ' + slider2.value(), 30, 60);
 	// text('desired separation: ' + slider3.value(), 30, 100);
@@ -96,7 +92,7 @@ function drawKeypoints() {
 		if (keypoint.score > 0.2) {
 			fill(255);
 			noStroke();
-			image(nose,keypoint.position.x, keypoint.position.y, 60, 60);
+			image(nose, keypoint.position.x, keypoint.position.y, 60, 60);
 		}
 		for (let v of predators) {
 			v.applyBehaviors(predators, keypoint.position.x, keypoint.position.y);
