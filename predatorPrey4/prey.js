@@ -76,7 +76,7 @@ class Prey {
       // Steering = Desired minus velocity
       let steer = p5.Vector.sub(desired, this.velocity);
       steer.limit(this.maxforce); // Limit to maximum steering force
-      if (eyesight < 50){
+      if (eyesight < 150){
       return steer;
       } else {
         return this.velocity;

@@ -13,13 +13,15 @@ let video;
 let poseNet;
 let poses = [];
 
-//images
+//images and font
 let aquarium;
 let badFish;
 let goodFish;
 let nose;
-const flipHorizontal = true;
+let retron;
 
+//health meter
+let health = 10;
 // setup function!
 function setup() {
 
@@ -28,6 +30,7 @@ function setup() {
 	badFish = loadImage('/assets/piranha3.png');
 	goodFish = loadImage('assets//prey3.png');
 	nose = loadImage('/assets/nose.png')
+	retron = loadFont('/assets/Retron2000.ttf');
 
 	// filling the array of predators
 	for (let i = 0; i < 5; i++) {
@@ -40,7 +43,7 @@ function setup() {
 	video = createCapture(video);
 	video.size(width, height);
 	// Create a new poseNet method with a single detection
-	poseNet = ml5.poseNet(video, flipHorizontal, modelReady);
+	poseNet = ml5.poseNet(video, modelReady);
 	// This sets up an event that fills the global variable "poses"
 	// with an array every time new poses are detected
 	poseNet.on('pose', function (results) {
@@ -56,6 +59,8 @@ function setup() {
 	// slider2.position(20, 70);
 	// slider3 = createSlider(10, 160, 24);
 	// slider3.position(20, 110);
+
+	textFont(retron)
 }
 
 function modelReady() {
@@ -69,11 +74,21 @@ function draw() {
 	translate(video.width, 0);
 	scale(-1, 1);
 	image(aquarium, 0, 0, width, height);
-	fill(255);
-	textSize(16);
-	noStroke();
 	drawKeypoints();
 	pop();
+	//health bar
+
+	noStroke();
+	fill(255);
+	textSize(36);
+	text("HEALTH", 20, 500);
+	stroke(255);
+	strokeWeight(4);
+	noFill();
+	rect(18, 508, 304, 34);
+	noStroke();
+	fill(244, 66, 176);
+	rect(20, 510, map(health,0,20,0,300), 30);
 
 
 	//text('separate force: ' + slider1.value(), 30, 20);
@@ -83,12 +98,11 @@ function draw() {
 }
 
 function drawKeypoints() {
-	// Loop through all the poses detected
-	if ( poses.length > 0) {
+	if (poses.length > 0) {
 		// For each pose detected, look for the nose
 		let pose = poses[0].pose;
 		let keypoint = pose.keypoints[0];
-		// Only place a googly eye is the pose probability is bigger than 0.2
+		// Only place a nose if probability is bigger than 0.2
 		if (keypoint.score > 0.2) {
 			fill(255);
 			noStroke();
@@ -102,6 +116,8 @@ function drawKeypoints() {
 			if (v.isOver(keypoint.position.x, keypoint.position.y)) {
 				predators.splice(v, 1);
 				predators.push(new Predator(random(width), 0));
+				if (health > 0) health -= 1;
+				console.log("health: " + health)
 			}
 		}
 
@@ -113,7 +129,8 @@ function drawKeypoints() {
 			if (v.isOver(keypoint.position.x, keypoint.position.y)) {
 				preys.splice(v, 1)
 				preys.push(new Prey(random(width), 0));
-				console.log("prey left: " + preys.length)
+				if (health < 20) health += 1;
+				console.log("health: " + health)
 			}
 		}
 	}
