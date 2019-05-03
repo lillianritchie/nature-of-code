@@ -11,4 +11,4 @@ Classwork for Nature of Code
 * Final Prep | Experiment | [Predators and Prey v1](https://lillianritchie.github.io/nature-of-code/separate-seek)
 * Final Prep | Experiment | [Predators and Prey v2](https://lillianritchie.github.io/nature-of-code/predatorPrey)
 * Final Prep | Experiment | [Predators and Prey v3](https://lillianritchie.github.io/nature-of-code/predatorPrey3)
-* Final Prep | WIP | [Predators and Prey v4](https://lillianritchie.github.io/nature-of-code/predatorPrey4)
+
