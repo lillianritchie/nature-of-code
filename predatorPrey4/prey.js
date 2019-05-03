@@ -103,8 +103,12 @@ class Prey {
     strokeWeight(2);
     push();
     translate(this.position.x, this.position.y);
-    //ellipse(0, 0, this.r, this.r);
+    if(this.velocity.x <= 0){
     image(goodFish,0,0,40,40);
+    } else if(this.velocity.x > 0){
+    scale(-1,1);
+    image(goodFish,0,0,40,40);
+    }
     pop();
   }
 

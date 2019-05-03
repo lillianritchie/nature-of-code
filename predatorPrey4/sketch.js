@@ -12,12 +12,13 @@ let slider3 = 40;
 let video;
 let poseNet;
 let poses = [];
-let player;
+
 
 //images
 let aquarium;
 let badFish;
 let goodFish;
+let nose;
 const flipHorizontal = true;
 
 
@@ -29,6 +30,7 @@ function setup() {
 	aquarium = loadImage('/assets/ocean.jpg');
 	badFish = loadImage('/assets/piranha3.png');
 	goodFish = loadImage('assets//prey3.png');
+	nose = loadImage('/assets/nose.png')
 	
 	// filling the array of predators
 	for (let i = 0; i < 10; i++) {
@@ -94,7 +96,7 @@ function drawKeypoints() {
 		if (keypoint.score > 0.2) {
 			fill(255);
 			noStroke();
-			image(video,keypoint.position.x, keypoint.position.y, 40, 40);
+			image(nose,keypoint.position.x, keypoint.position.y, 60, 60);
 		}
 		for (let v of predators) {
 			v.applyBehaviors(predators, keypoint.position.x, keypoint.position.y);

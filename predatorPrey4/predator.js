@@ -10,12 +10,12 @@ class Predator {
     this.velocity = createVector(random(-1, 1), random(-1, 1)); //start the fish moving in a random direction
   }
 
-  applyBehaviors(predators, mX,mY) {
+  applyBehaviors(predators, mX, mY) {
 
     let separateForce = this.separate(predators); //set the separate force to keep predators separated from colliding with each other
-    let seekForce = this.seek(createVector(mX, mY));// set the seek force to steer predators towards player
+    let seekForce = this.seek(createVector(mX, mY)); // set the seek force to steer predators towards player
 
-    separateForce.mult(slider1);//multiply the separate force by slider amount (now hard coded)
+    separateForce.mult(slider1); //multiply the separate force by slider amount (now hard coded)
     seekForce.mult(slider2); //multiply the seek force by slider amount (now hard coded)
 
     this.applyForce(separateForce); // apply it!
@@ -97,8 +97,12 @@ class Predator {
     strokeWeight(2);
     push();
     translate(this.position.x, this.position.y);
-    //ellipse(0, 0, 30, 30);
-    image(badFish,-30,-30,60,60);
+    if (this.velocity.x <= 0) {
+      image(badFish, -30, -30, 60, 60);
+    } else if (this.velocity.x > 0) {
+      scale(-1, 1);
+      image(badFish, -30, -30, 60, 60);
+    }
     pop();
   }
 
@@ -111,11 +115,10 @@ class Predator {
   }
 
   //check if the predator has caught the player
-  isOver (mX, mY) {
-    if (dist(mX, mY, this.position.x, this.position.y) < this.r ){
+  isOver(mX, mY) {
+    if (dist(mX, mY, this.position.x, this.position.y) < this.r) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
